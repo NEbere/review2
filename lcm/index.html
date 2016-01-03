@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>LCM of array of integers</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- form to get user input -->
+    <div class="container">
+        <h3>Enter Number Below</h3>
+         <form>
+          <div class="form-group">
+            <label for="string">Enter Number</label>
+            <input type="number" class="form-control" id="string1" value="first integer" name="integer[]">
+          </div>
+          <div class="form-group cloneInput">
+            <label for="string">Another Number</label>
+            <input type="number" class="form-control" id="string2" value="second integer" name="integer[]">
+          </div>
+          
+          <div class="newInput"></div>
+          
+        </form>
+        <button type="submit" class="btn btn-default addInput">Add Another Integer</button>
+        <button type="submit" class="btn btn-default" onclick="lcm()">Calculate LCM</button>
+    </div>
+   
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".addInput").click(function(){
+                $(".cloneInput").clone().attr("class","cloneInput"+1).appendTo(".newInput");
+                
+            });
+        });
+            function lcm (){
+            var integers = [];
+            $("input[name='integer[]']").each(function() {
+                integers.push($(this).val());
+                console.log(integers);
+            });
+        };
+        
+            function lcm(){
+                    var integers = $('input[name="integer[]"]').map(function(){return $(this).val();}).get();
+                    integers.sort();
+                    console.log(integers);    
+                    
+        
+            function arrayLCM(input_array) {
+                if (toString.call(input_array) !== "[object Array]")  
+                    return  false;  
+                     var r1 = 0, r2 = 0;
+                        var arrayLength = input_array.length;
+                        for(i=0;i<arrayLength;i++) {
+                            r1 = input_array[i] % input_array[i + 1];
+                            if(r1 === 0) {
+                                input_array[i + 1] = (input_array[i] * input_array[i+1]) / input_array[i + 1];
+                            }
+                            else {
+                                r2 = input_array[i + 1] % r1;
+                                if(r2 === 0) {
+                                    input_array[i + 1] = (input_array[i] * input_array[i + 1]) / r1;
+                                }
+                                else {
+                                    input_array[i+1] = (input_array[i] * input_array[i + 1]) / r2;
+                                }
+                            }
+                        }
+                        return input_array[arrayLength - 1];
+                    }
+
+    alert("LCM of " + integers + " is: " + arrayLCM(integers)); 
+        };
+
+        
+        
+        
+    </script>
+  </body>
+</html>

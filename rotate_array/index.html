@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Characters in Strings</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- form to get user input -->
+    <div class="container">
+        <h3>Enter integers Below</h3>
+         <form id="myForm">
+          <div class="form-group cloneInput">
+            <label for="string">Enter Integer</label>
+            <input type="number" class="form-control inte" id="string1" placeholder="Enter numbers" value="value" name="integer[]">
+          </div>
+          <div class="newInput"></div>
+          <div class="form-group">
+            <label for="string">Enter N position</label>
+            <input type="number" class="form-control" id="nPosition" placeholder="Enter N" value="value">
+          </div>
+    
+        </form>
+
+       <button class="addInput btn btn-default">Add Another Integer</button>
+        <button class="btn btn-default" onclick="getArray()">Get string intersection</button>
+        <div id="stringIntersection">
+
+        </div>
+    </div>
+    
+    
+   
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+         $(document).ready(function(){
+            $(".addInput").click(function(){
+                    $(".cloneInput").clone().attr("class","cloneInput"+1).appendTo(".newInput");
+
+                });
+            });
+        
+            function getArray(){
+                if (document.getElementById("nPosition").value == ''){
+                    alert("Please enter a number for the rotaion point");
+                    }
+                else{
+                    var integers = $('input[name="integer[]"]').map(function(){return $(this).val();}).get();
+                    integers.sort();
+                    //get the N position
+                    var nPosition = document.getElementById("nPosition").value;
+                    //split string to an array
+                    //var array1 = string1.split("").sort();
+                    //get array last element
+                    var last_element = integers[integers.length - 1];
+                    //slice new array from original array from N position
+                    var arrayA = integers.slice(nPosition - 1, last_element);
+                    //reverse arrayA
+                    var reversed_array = arrayA.reverse();
+                    //splice new array from original array from N position
+                    var arrayB = integers.splice(0, nPosition - 1);
+                    //concate both array
+                    var newArray = reversed_array.concat(arrayB);
+
+
+                    alert("reversed array fron N = " +  nPosition + " is " + newArray);    
+                    };
+            }
+        
+    </script>
+  </body>
+</html>
